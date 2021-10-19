@@ -6,51 +6,45 @@ import "./assets/img/rigo-baby.jpg";
 import "./assets/img/4geeks.ico";
 
 const BODY = document.querySelector("body");
-const number = ["2", "3", "4", "5", "6", "7", "8", "9", "J", "Q", "K", "A"];
-const suit = ["♠", "♣", "♥", "♦"];
+let number = ["2", "3", "4", "5", "6", "7", "8", "9", "J", "Q", "K", "A"];
+let suits = ["♠", "♣", "♥", "♦"];
+const NUMBER_POSITION = randomItem(number);
+const SUIT_POSITION = randomItem(suits);
 
 window.onload = function() {
-  /* choosedCard(); */
-  card();
+  Card();
 };
 
-//funcion para dar un item aleatorio
 function randomItem(array) {
-  for (let i in array) {
-    let randomIndex = array[Math.floor(Math.random() * array.length)];
-    return randomIndex;
-  }
+  return Math.floor(Math.random() * array.length);
 }
-//función general de generar una carta con número y palo aleatorio
-function card() {
+
+function Card() {
   let card = document.createElement("div");
-  card.classList.add("card"); //carta
+  card.classList.add("card");
   BODY.appendChild(card);
 
   let suitup = document.createElement("div");
-  suitup.classList.add("suitup"); //palo superior
+  suitup.classList.add("suitup");
   card.appendChild(suitup);
 
   let num = document.createElement("span");
-  num.classList.add("num"); //numero
+  num.classList.add("num");
   card.appendChild(num);
 
   let suitdown = document.createElement("div");
-  suitdown.classList.add("suitdown"); //Palo inferior
+  suitdown.classList.add("suitdown");
   card.appendChild(suitdown);
 
-  num.innerHTML = randomItem(number);
-  suitup.innerHTML = suitdown.innerHTML = randomItem(suit);
+  num.innerHTML = number[NUMBER_POSITION];
+  suitup.innerHTML = suitdown.innerHTML = suits[SUIT_POSITION];
 
-  if (
-    randomItem(suit) == randomItem("♠") ||
-    randomItem(suit) == randomItem("♣")
-  ) {
-    suitup.classList.add = "black";
-    suitdown.classList.add = "black";
+  if (suits[SUIT_POSITION] == "♠" || suits[SUIT_POSITION] == "♣") {
+    suitup.classList.add("color1");
+    suitdown.classList.add("color1");
   } else {
-    suitup.classList.add = "red";
-    suitdown.classList.add = "red";
+    suitup.classList.add("color2");
+    suitdown.classList.add("color2");
   }
 }
 
